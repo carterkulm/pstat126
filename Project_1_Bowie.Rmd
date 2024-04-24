@@ -1,0 +1,94 @@
+---
+title: "PSTAT126 Project1"
+author: "Bowie Chuang"
+date: "2024-04-16"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+# default code chunk options
+knitr::opts_chunk$set(echo = F,
+                      results = 'markup',
+                      message = F, 
+                      warning = F,
+                      fig.width = 4,
+                      fig.height = 3,
+                      fig.align = 'center') 
+
+# load packages
+library(faraway)
+library(tidyverse)
+```
+
+# Data Source: Billionaires Statistics Dataset (2023) Kaggle
+https://www.kaggle.com/datasets/nelgiriyewithana/billionaires-statistics-dataset/data
+
+
+```{r, echo = False}
+#file.choose()
+df = read.csv("/Users/bowiechuang/Downloads/Billionaires Statistics Dataset.csv")
+head(df)
+```
+```{r}
+install.packages("skimr")
+library(skimr)
+```
+
+```{r}
+summary <- skim(df)
+print(summary)
+
+```
+
+```{r}
+set.seed(999)
+df1 <- df %>% 
+  select(finalWorth, age, country, industries, gender, birthYear, cpi_country, gdp_country,  tax_revenue_country_country, total_tax_rate_country) %>% drop_na()
+```
+
+```{r}
+summary(df1)
+```
+
+```{r}
+df1 <- df1[sample(nrow(df1), 500), ]
+df1
+```
+
+```{r}
+install.packages("corrplot")
+library(corrplot)
+```
+
+```{r}
+df1_num <- df1 %>%
+  select_if(is.numeric)
+correlation_matrix <- cor(df1_num)
+
+corrplot(correlation_matrix, method = "circle", tl.cex = 0.45)
+
+```
+Based on the Correlation Matrix, it seems like most of the quantitative variables that we see here are not correlated with one another. This might lead to less correlated results when we dive into linear regression model. 
+
+age and total tax rate, cpi country and total tax rate s
+
+```{r}
+ggplot(data = df1, aes(x = age, y = total_tax_rate_country, color = gender))+
+  geom_point(alpha = 0.7)+
+  geom_smooth(method = 'lm', se = F, color = 'black')+
+  labs(x = 'Age', y = 'Total Tax Rate (Country)')
+
+```
+
+
+```{r}
+ggplot(data = df1, aes(x = gender, y = finalWorth)) + geom_boxplot()
+
+```
+
+Indicate population: 
+
+
+
+
+
