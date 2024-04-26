@@ -88,6 +88,15 @@ ggplot(data = df1, aes(x = gender, y = finalWorth)) + geom_boxplot()
 
 Indicate population: 
 
+```{r}
+library(tidyverse)
+
+
+hist(df$age)
+
+plot(x = df$life_expectancy_country, y = df$finalWorth )
+```{r}
+
 
 
 
