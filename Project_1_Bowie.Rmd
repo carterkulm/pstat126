@@ -94,8 +94,18 @@ library(tidyverse)
 
 hist(df$age)
 
-plot(x = df$life_expectancy_country, y = df$finalWorth )
+
+```
+Here is a histogram of the ages of the members when the data was recorded. Although not normal, the data does portray a slightly "bell-curve" look, with the peak being at 55-60 years, and a second peak being around 70 years. This makes statistical sense, since it takes time and experience to accumulate such high amounts of wealth. The graph is also more skewed to the left, and more uniform to the right, which supports this idea even more. It seems like the average age of the members is around 70-80.
+
 ```{r}
+
+library(tidyverse)
+
+
+plot(x = df$life_expectancy_country, y = df$finalWorth )
+
+```
 
 
 
